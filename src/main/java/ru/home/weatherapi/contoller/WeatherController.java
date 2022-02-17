@@ -16,18 +16,19 @@ import java.time.LocalDateTime;
 public class WeatherController {
 
     private WeatherService weatherService;
-    GetWehaterByDate getWehaterByDate;
+//    GetWehaterByDate getWehaterByDate;
 
     @Autowired
-    WeatherController(WeatherService weatherService, GetWehaterByDate getWehaterByDate) {
+    WeatherController(WeatherService weatherService){
+//                      GetWehaterByDate getWehaterByDate) {
         this.weatherService = weatherService;
-        this.getWehaterByDate = getWehaterByDate;
+//        this.getWehaterByDate = getWehaterByDate;
     }
 
     @GetMapping
-    public ResponseEntity getWeather() {
+    public ResponseEntity getWeather(Date date) {
 
-        return new ResponseEntity(getWehaterByDate.getWeahter(), HttpStatus.OK);
+        return new ResponseEntity(weatherService.getWeather(date), HttpStatus.OK);
     }
 
 }

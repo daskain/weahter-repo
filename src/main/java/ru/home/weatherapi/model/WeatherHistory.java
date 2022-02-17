@@ -3,6 +3,8 @@ package ru.home.weatherapi.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.io.SerializablePermission;
 import java.sql.Date;
 
 @Entity
@@ -10,15 +12,23 @@ import java.sql.Date;
 @Data
 public class WeatherHistory {
 
-//    @EmbeddedId
-//    private WeatherHistoryId weatherHistoryId;
+    @EmbeddedId
+    private WeatherHistoryId weatherHistoryId;
 
-    @Id
-    @Column(name = "weather_date")
+    @Column(name = "weather_date", updatable = false, insertable = false)
     private Date weatherDate;
 
-    @Column(name = "weather_name")
+    @Column(name = "weather_name", updatable = false, insertable = false)
     private String weatherName;
+
+    @Data
+    @Embeddable
+    private static class WeatherHistoryId implements Serializable {
+
+        private Date date;
+        private String name;
+
+    }
 
 
 }
